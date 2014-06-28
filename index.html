@@ -1,10 +1,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>OpenStreetMap Philippines Imagery Coverage Map</title>
+<title>Experimental Imagery Coverage Map</title>
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
 <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.ie.css" />
 <![endif]-->
 <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
 <script type="text/javascript">
@@ -17,22 +17,22 @@ var LayersControl;
 window.onload = function() {
 
    // Specify default map location
-   var initLat  = 12.5;
-   var initLng  = 122;
+   var initLat = 12.5;
+   var initLng = 122;
    var initZoom = 6;
 
    // Obtain map location from URL fragment (permalink) if any
    if (location.hash) {
       var coords = location.hash.split(',');
-      initLat  = Number(coords[0].substr(1));
-      initLng  = Number(coords[1]);
+      initLat = Number(coords[0].substr(1));
+      initLng = Number(coords[1]);
       initZoom = Number(coords[2]);
    }
 
    // Initialize the map and permalink
    Map = new L.Map('map', {
       center : new L.LatLng(initLat, initLng),
-      zoom   : initZoom
+      zoom : initZoom
    });
    updatePermalink();
 
@@ -49,7 +49,7 @@ window.onload = function() {
    // Create the MapQuest tile layer
    var mapquestURL = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png';
    var mapquestLayer = new L.TileLayer(mapquestURL, {
-      subdomains  : ['otile1', 'otile2', 'otile3', 'otile4'],
+      subdomains : ['otile1', 'otile2', 'otile3', 'otile4'],
       attribution : 'Tiles &copy; <a href="http://open.mapquest.com/">MapQuest</a>',
    });
    tilesLayers["MapQuest"] = mapquestLayer;
@@ -82,7 +82,7 @@ window.onload = function() {
 
    // Add event handlers for the edit buttons
    document.getElementById('editpotlatch').onclick = editInPotlatch;
-   document.getElementById('editjosm'    ).onclick = editInJosm;
+   document.getElementById('editjosm' ).onclick = editInJosm;
 
    // Load the imagery coverage data
    XhrObject.onreadystatechange = processOutlines;
@@ -106,14 +106,14 @@ function processOutlines() {
       var outlinesLayer = L.geoJson(feature, {
          style: function(feature) {
             return {
-               stroke      : true,
-               color       : feature.properties.color,
-               opacity     : 0.6,
-               weight      : 1,
-               fill        : true,
-               fillColor   : feature.properties.color,
+               stroke : true,
+               color : feature.properties.color,
+               opacity : 0.6,
+               weight : 1,
+               fill : true,
+               fillColor : feature.properties.color,
                fillOpacity : 0.3,
-               clickable   : false,
+               clickable : false,
             };
          }
       });
@@ -142,10 +142,10 @@ function updatePermalink() {
 function editInPotlatch() {
    if (Map.getZoom() > 13) {
       var latLng = Map.getCenter();
-      var lat    = latLng.lat;
-      var lng    = latLng.lng;
-      var zoom   = Map.getZoom();
-      var url    = 'http://osm.org/edit?lat=' + lat + '&lon=' + lng + '&zoom=' + zoom;
+      var lat = latLng.lat;
+      var lng = latLng.lng;
+      var zoom = Map.getZoom();
+      var url = 'http://osm.org/edit?lat=' + lat + '&lon=' + lng + '&zoom=' + zoom;
       window.open(url, 'popup');
    }
    else {
@@ -225,7 +225,7 @@ a {
 <body>
 <div id="infopane">
 <h1>OSMPH Imagery Coverage Map</h1>
-<p>This is a map that shows the coverage of satellite/aerial imagery in the
+<p>This is a map that shows the partial MapBox Satellite coverage of satellite/aerial imagery in the
 Philippines that is available for tracing by OpenStreetMap contributors.
 <a href="http://wiki.openstreetmap.org/wiki/Philippines/High-resolution_imagery">More information</a>.</p>
 <ul>
@@ -234,7 +234,7 @@ Philippines that is available for tracing by OpenStreetMap contributors.
 <li><a id="editpotlatch" href="#">Edit in Potlatch</a></li>
 <li><a id="editjosm" href="#">Edit in JOSM</a></li>
 </ul>
-<p id="credits">Map data &copy; OpenStreetMap contributors (<a href="http://www.openstreetmap.org/copyright">terms</a>). <a href="https://github.com/OSMPH/Imagery_Coverage_Map">Fork this website on Github</a>.</p>
+<p id="credits">Map data &copy; OpenStreetMap contributors (<a href="http://www.openstreetmap.org/copyright">terms</a>). <a href="https://github.com/OSMPH/Imagery_Coverage_Map">Fork this website</a> <a href="https://github.com/ianlopez1115/MBS_Imagery_Coverage_Map">or this version</a> on Github.</p>
 </div>
 <div id="map"></div>
 </body>
